@@ -6,7 +6,6 @@ import 'package:intl/intl.dart';
 import 'package:datetime_picker_formfield/datetime_picker_formfield.dart';
 import 'package:flutter_analog_clock/flutter_analog_clock.dart';
 import 'package:flutter/widgets.dart';
-import 'package:time/time.dart';
 
 void main() => runApp(MyApp());
 var onoff = 0;
