@@ -24,6 +24,7 @@ dependencies:
   # Use with the CupertinoIcons class for iOS style icons.
   countdown_flutter: ^0.1.1
 
+  audioplayers: ^0.13.5
   datetime_picker_formfield: ^0.4.3
   flutter_analog_clock: ^0.1.0
 

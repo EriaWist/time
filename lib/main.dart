@@ -6,6 +6,7 @@ import 'package:intl/intl.dart';
 import 'package:datetime_picker_formfield/datetime_picker_formfield.dart';
 import 'package:flutter_analog_clock/flutter_analog_clock.dart';
 import 'package:flutter/widgets.dart';
+import 'package:audioplayers/audioplayers.dart';
 
 void main() => runApp(MyApp());
 var onoff = 0;
@@ -14,7 +15,86 @@ class MyApp extends StatelessWidget {
   // This widget is the root of your application.
   @override
   Widget build(BuildContext context) {
-    return maitest();
+    return MaterialApp(
+      title: "WTF",
+      home: home_page_de(),
+    );
+  }
+}
+
+class home_page_de extends StatelessWidget {
+  @override
+  Widget build(BuildContext context) {
+    return MaterialApp(
+      home: Scaffold(
+        body: Container(
+          child: Center(
+            child: Row(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: <Widget>[
+                OutlineButton(
+                  child: Text("時間"),
+                  color: Colors.deepOrange[200],
+                  onPressed: () {
+                    Navigator.push(
+                      context,
+                      MaterialPageRoute(builder: (context) => maitest()),
+                    );
+                  },
+                ),
+                OutlineButton(
+                  color: Colors.deepOrange[200],
+                  onPressed: () {
+                    Navigator.push(
+                      context,
+                      MaterialPageRoute(builder: (context) => gankenn()),
+                    );
+                  },
+                  child: Text("健康"),
+                )
+              ],
+            ),
+          ),
+        ),
+      ),
+    );
+  }
+}
+
+class gankenn extends StatefulWidget {
+  @override
+  _gankennState createState() => _gankennState();
+}
+
+class _gankennState extends State<gankenn> {
+  var gans_time = 0;
+  @override
+  Widget build(BuildContext context) {
+    return MaterialApp(
+      home: Scaffold(
+        appBar: AppBar(
+          title: Text("Time"),
+          leading: IconButton(
+            icon: Icon(Icons.keyboard_return),
+            onPressed: () {
+              Navigator.pop(context);
+            },
+          ),
+          backgroundColor: Colors.deepOrange[200],
+        ),
+        body: Container(
+          child: Center(
+            child: Row(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: <Widget>[
+                Text("今天運動了${gans_time}分鐘"),
+                TextField(),
+              ],
+            ),
+          ),
+        ),
+      ),
+    );
   }
 }
 
@@ -23,6 +103,16 @@ class maitest extends StatelessWidget {
   Widget build(BuildContext context) {
     return MaterialApp(
       home: Scaffold(
+        appBar: AppBar(
+          title: Text("Time"),
+          leading: IconButton(
+            icon: Icon(Icons.keyboard_return),
+            onPressed: () {
+              Navigator.pop(context);
+            },
+          ),
+          backgroundColor: Colors.deepOrange[200],
+        ),
         body: Row(
           mainAxisAlignment: MainAxisAlignment.center,
           children: <Widget>[
@@ -136,7 +226,8 @@ class _test_time2State extends State<test_time2> {
             onPressed: () async {
               if (onoff == 1) {
                 var time = await showTimePicker(
-                    context: context, initialTime: TimeOfDay.now());
+                    context: context,
+                    initialTime: TimeOfDay(hour: 8, minute: 0));
                 var nowt = DateTime.now().hour * 60;
                 nowt += DateTime.now().minute;
 
