@@ -194,7 +194,8 @@ class _test_timeState extends State<test_time> {
               print(nowt);
               print(all_time);
               if (nowt >= all_time) {
-                tnumb = nowt - all_time + (24 * 60);
+                tnumb = nowt - all_time;
+                if (tnumb <= (12 * 60)) tnumb += (12 * 60);
               } else {
                 tnumb = all_time - nowt;
               }
@@ -288,10 +289,12 @@ class _test_time2State extends State<test_time2> {
                 print(nowt);
                 print(all_time);
                 if (nowt >= all_time) {
-                  tnumb = nowt - all_time + (24 * 60);
+                  tnumb = nowt - all_time;
+                  if (tnumb <= (12 * 60)) tnumb += (12 * 60);
                 } else {
                   tnumb = all_time - nowt;
                 }
+                //tnumb = tnumb % (24 * 60);
                 wallup = tnumb * 60;
                 setState(() {
                   show_time = DateTime.now();
