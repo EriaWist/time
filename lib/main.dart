@@ -1,3 +1,4 @@
+import 'dart:async';
 import 'dart:math';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
@@ -10,6 +11,8 @@ import 'package:audioplayers/audioplayers.dart';
 
 void main() => runApp(MyApp());
 var onoff = 0;
+var wallup = 0;
+var sellp = 0;
 
 class MyApp extends StatelessWidget {
   // This widget is the root of your application.
@@ -145,9 +148,26 @@ class _test_timeState extends State<test_time> {
   DateTime show_time;
   var a = Countdown(
     interval: Duration(seconds: 1),
-    duration: Duration(hours: 0),
+    duration: Duration(
+      seconds: sellp,
+    ),
     builder: (BuildContext ctx, remaining) {
-      return Text("距離睡眠時間");
+      if (sellp == 0) {
+        return Text("距離睡眠時間");
+      } else {
+        const period = const Duration(seconds: 1);
+        Timer.periodic(period, (timer) {
+          //到时回调
+          sellp--;
+          if (sellp >= 0) {
+            //取消定时器，避免无限回调
+            timer.cancel();
+            timer = null;
+          }
+        });
+        return Text(
+            "距離睡眠還有${remaining.inHours}小時:${remaining.inMinutes % 60}分鐘:${remaining.inSeconds % 60}秒"); // 01:00:00)
+      }
     },
   );
   @override
@@ -178,7 +198,7 @@ class _test_timeState extends State<test_time> {
               } else {
                 tnumb = all_time - nowt;
               }
-
+              sellp = (tnumb - 10) * 60;
               print(tnumb);
               onoff = 1;
               setState(() {
@@ -187,6 +207,16 @@ class _test_timeState extends State<test_time> {
                   key: Key(Random().nextInt(1000).toString()),
                   duration: Duration(minutes: tnumb - 10),
                   builder: (BuildContext ctx, remaining) {
+                    const period = const Duration(seconds: 1);
+                    Timer.periodic(period, (timer) {
+                      //到时回调
+                      sellp--;
+                      if (sellp >= 0) {
+                        //取消定时器，避免无限回调
+                        timer.cancel();
+                        timer = null;
+                      }
+                    });
                     return Text(
                         "距離睡眠還有${remaining.inHours}小時:${remaining.inMinutes % 60}分鐘:${remaining.inSeconds % 60}秒"); // 01:00:00
                   },
@@ -211,9 +241,26 @@ class _test_time2State extends State<test_time2> {
   DateTime show_time;
   var a = Countdown(
     interval: Duration(seconds: 1),
-    duration: Duration(hours: 0),
+    duration: Duration(
+      seconds: wallup,
+    ),
     builder: (BuildContext ctx, remaining) {
-      return Text("距離起床時間");
+      if (wallup == 0) {
+        return Text("距離睡眠時間");
+      } else {
+        const period = const Duration(seconds: 1);
+        Timer.periodic(period, (timer) {
+          //到时回调
+          wallup--;
+          if (wallup >= 0) {
+            //取消定时器，避免无限回调
+            timer.cancel();
+            timer = null;
+          }
+        });
+        return Text(
+            "距離起床還有${remaining.inHours}小時:${remaining.inMinutes % 60}分鐘:${remaining.inSeconds % 60}秒"); // 01:00:00)
+      }
     },
   );
   @override
@@ -245,13 +292,24 @@ class _test_time2State extends State<test_time2> {
                 } else {
                   tnumb = all_time - nowt;
                 }
-
+                wallup = tnumb * 60;
                 setState(() {
                   show_time = DateTime.now();
                   a = Countdown(
                     key: Key(Random().nextInt(1000).toString()),
                     duration: Duration(minutes: tnumb),
                     builder: (BuildContext ctx, remaining) {
+                      const period = const Duration(seconds: 1);
+                      Timer.periodic(period, (timer) {
+                        //到时回调
+                        wallup--;
+                        if (wallup >= 0) {
+                          //取消定时器，避免无限回调
+                          timer.cancel();
+                          timer = null;
+                        }
+                      });
+
                       return Text(
                           "距離起床還有${remaining.inHours}小時:${remaining.inMinutes % 60}分鐘:${remaining.inSeconds % 60}秒"); // 01:00:00
                     },
