@@ -13,6 +13,7 @@ void main() => runApp(MyApp());
 var onoff = 0;
 var wallup = 0;
 var sellp = 0;
+var gans_time = 0;
 
 class MyApp extends StatelessWidget {
   // This widget is the root of your application.
@@ -70,7 +71,7 @@ class gankenn extends StatefulWidget {
 }
 
 class _gankennState extends State<gankenn> {
-  var gans_time = 0;
+  var tgandon = 0;
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
@@ -86,14 +87,97 @@ class _gankennState extends State<gankenn> {
           backgroundColor: Colors.deepOrange[200],
         ),
         body: Container(
-          child: Center(
-            child: Row(
-              mainAxisAlignment: MainAxisAlignment.center,
-              children: <Widget>[
-                Text("今天運動了${gans_time}分鐘"),
-                TextField(),
-              ],
-            ),
+          child: Column(
+            children: <Widget>[
+              Text("${TimeOfDay.now()}今天運動了${gans_time}分鐘"),
+              Text("設定運動 運動了${tgandon}分鐘"),
+              Row(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: <Widget>[
+                  OutlineButton(
+                    child: Text("加一小時"),
+                    onPressed: () {
+                      tgandon += 60;
+                      setState(() {});
+                    },
+                  ),
+                  OutlineButton(
+                    child: Text("加10分鐘"),
+                    onPressed: () {
+                      tgandon += 10;
+                      setState(() {});
+                    },
+                  ),
+                  OutlineButton(
+                    child: Text("加5分鐘"),
+                    onPressed: () {
+                      tgandon += 5;
+                      setState(() {});
+                    },
+                  ),
+                  OutlineButton(
+                    child: Text("加1分鐘"),
+                    onPressed: () {
+                      tgandon += 1;
+                      setState(() {});
+                    },
+                  )
+                ],
+              ),
+              Row(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: <Widget>[
+                  OutlineButton(
+                    child: Text("減一小時"),
+                    onPressed: () {
+                      if (tgandon > 60)
+                        tgandon -= 60;
+                      else
+                        tgandon = 0;
+                      setState(() {});
+                    },
+                  ),
+                  OutlineButton(
+                    child: Text("減10分鐘"),
+                    onPressed: () {
+                      if (tgandon > 10)
+                        tgandon -= 10;
+                      else
+                        tgandon = 0;
+                      setState(() {});
+                    },
+                  ),
+                  OutlineButton(
+                    child: Text("減5分鐘"),
+                    onPressed: () {
+                      if (tgandon > 5)
+                        tgandon -= 5;
+                      else
+                        tgandon = 0;
+                      setState(() {});
+                    },
+                  ),
+                  OutlineButton(
+                    child: Text("減1分鐘"),
+                    onPressed: () {
+                      if (tgandon > 1)
+                        tgandon -= 1;
+                      else
+                        tgandon = 0;
+                      setState(() {});
+                    },
+                  )
+                ],
+              ),
+              OutlineButton(
+                child: Text("記錄"),
+                onPressed: () {
+                  gans_time += tgandon;
+                  tgandon = 0;
+                  setState(() {});
+                },
+              )
+            ],
           ),
         ),
       ),
