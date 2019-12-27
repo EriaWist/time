@@ -36,7 +36,7 @@ class home_page_de extends StatelessWidget {
               mainAxisAlignment: MainAxisAlignment.center,
               children: <Widget>[
                 OutlineButton(
-                  child: Text("時間"),
+                  child: Text("睡眠"),
                   color: Colors.deepOrange[200],
                   onPressed: () {
                     Navigator.push(
@@ -76,7 +76,7 @@ class _gankennState extends State<gankenn> {
     return MaterialApp(
       home: Scaffold(
         appBar: AppBar(
-          title: Text("Time"),
+          title: Text("運動"),
           leading: IconButton(
             icon: Icon(Icons.keyboard_return),
             onPressed: () {
@@ -107,7 +107,7 @@ class maitest extends StatelessWidget {
     return MaterialApp(
       home: Scaffold(
         appBar: AppBar(
-          title: Text("Time"),
+          title: Text("睡眠"),
           leading: IconButton(
             icon: Icon(Icons.keyboard_return),
             onPressed: () {
