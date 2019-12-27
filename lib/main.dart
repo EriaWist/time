@@ -7,7 +7,6 @@ import 'package:intl/intl.dart';
 import 'package:datetime_picker_formfield/datetime_picker_formfield.dart';
 import 'package:flutter_analog_clock/flutter_analog_clock.dart';
 import 'package:flutter/widgets.dart';
-import 'package:audioplayers/audioplayers.dart';
 
 void main() => runApp(MyApp());
 var onoff = 0;
@@ -36,25 +35,29 @@ class home_page_de extends StatelessWidget {
             child: Row(
               mainAxisAlignment: MainAxisAlignment.center,
               children: <Widget>[
-                OutlineButton(
-                  child: Text("睡眠"),
-                  color: Colors.deepOrange[200],
-                  onPressed: () {
-                    Navigator.push(
-                      context,
-                      MaterialPageRoute(builder: (context) => maitest()),
-                    );
-                  },
+                Expanded(
+                  child: OutlineButton(
+                    child: Text("睡眠"),
+                    color: Colors.deepOrange[200],
+                    onPressed: () {
+                      Navigator.push(
+                        context,
+                        MaterialPageRoute(builder: (context) => maitest()),
+                      );
+                    },
+                  ),
                 ),
-                OutlineButton(
-                  color: Colors.deepOrange[200],
-                  onPressed: () {
-                    Navigator.push(
-                      context,
-                      MaterialPageRoute(builder: (context) => gankenn()),
-                    );
-                  },
-                  child: Text("健康"),
+                Expanded(
+                  child: OutlineButton(
+                    color: Colors.deepOrange[200],
+                    onPressed: () {
+                      Navigator.push(
+                        context,
+                        MaterialPageRoute(builder: (context) => gankenn()),
+                      );
+                    },
+                    child: Text("健康"),
+                  ),
                 )
               ],
             ),
@@ -88,8 +91,10 @@ class _gankennState extends State<gankenn> {
         ),
         body: Container(
           child: Column(
+            mainAxisAlignment: MainAxisAlignment.center,
             children: <Widget>[
-              Text("${TimeOfDay.now()}今天運動了${gans_time}分鐘"),
+              Text(
+                  "${TimeOfDay.now()}今天運動了${(gans_time / 60).floor()}小時${gans_time % 60}分鐘"),
               Text("設定運動 運動了${tgandon}分鐘"),
               Row(
                 mainAxisAlignment: MainAxisAlignment.center,
